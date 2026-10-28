@@ -109,7 +109,6 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .place img { width: 100%; height: 100%; object-fit: cover; }
 .place-ph { width: 100%; height: 100%; display: grid; place-content: center; justify-items: center; gap: 10px; color: var(--muted); font-size: .9rem; background: repeating-linear-gradient(135deg, #EDEDED 0 12px, #F3F3F3 12px 24px); }
 .place-ph svg { width: 40px; height: 44px; fill: var(--grey); }
-.place-cap { position: absolute; left: 12px; bottom: 12px; padding: 6px 12px; border-radius: 999px; background: #fff; font-size: .85rem; font-weight: 600; }
 .places-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; margin-top: 32px; }
 .places-foot p { color: var(--muted); }
 .places-foot b { font: 800 1.35rem/1 var(--font-head); letter-spacing: -0.03em; color: var(--ink); margin-right: 4px; }
@@ -144,7 +143,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .rows dd { font-weight: 600; font-variant-numeric: tabular-nums; }
 .calc-result { margin-top: 20px; padding: 22px 24px 24px; border-radius: 18px; background: var(--green); display: flex; flex-direction: column; gap: 10px; }
 .calc-result span { font-weight: 700; line-height: 1.2; }
-.calc-result strong { color: #fff; font: 800 clamp(2.2rem, 4vw, 3rem)/1 var(--font-head); letter-spacing: -0.045em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.calc-result strong { font: 800 clamp(2.2rem, 4vw, 3rem)/1 var(--font-head); letter-spacing: -0.045em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .note { margin-top: 14px; font-size: .85rem; color: var(--muted); }
 
 /* ---------- Proč ---------- */
