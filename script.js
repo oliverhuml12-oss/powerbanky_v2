@@ -1,3 +1,48 @@
+// ---------- Zvýrazňovač v hlavním nadpisu: tah po řádcích ----------
+// Rozdělí text na spany po vykreslených řádcích, aby se zvýraznění kreslilo
+// řádek po řádku. Při změně šířky se přepočítá už bez animace.
+(function () {
+  const el = document.querySelector('.marker');
+  if (!el) return;
+  const text = el.textContent.trim();
+  let lastWidth = 0;
+
+  function split(animate) {
+    const words = text.split(/\s+/);
+    el.classList.remove('is-split');
+    el.innerHTML = words.map((w) => '<span class="mw">' + w + '</span>').join(' ');
+    const lines = [];
+    let top = null;
+    el.querySelectorAll('.mw').forEach((w) => {
+      const t = Math.round(w.getBoundingClientRect().top);
+      if (top === null || Math.abs(t - top) > 4) { lines.push([]); top = t; }
+      lines[lines.length - 1].push(w.textContent);
+    });
+    el.innerHTML = lines.map((l) => '<span class="marker-line">' + l.join(' ') + '</span>').join(' ');
+    el.classList.add('is-split');
+    // constant pen speed: each line's duration follows its width, next line starts when the previous ends
+    const SPEED = 14 * parseFloat(getComputedStyle(el).fontSize); // 14 em/s: same feel on every screen
+    let delay = 0.25;
+    el.querySelectorAll('.marker-line').forEach((ln) => {
+      const dur = Math.max(0.18, ln.getBoundingClientRect().width / SPEED);
+      ln.style.setProperty('--dur', dur.toFixed(3) + 's');
+      ln.style.setProperty('--delay', delay.toFixed(3) + 's');
+      delay += dur;
+    });
+    el.classList.toggle('is-drawn', !animate);
+    lastWidth = el.parentElement.clientWidth;
+  }
+
+  const start = () => split(true);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+
+  let t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(() => { if (el.parentElement.clientWidth !== lastWidth) split(false); }, 150);
+  });
+})();
+
 // ---------- Kalkulačka výplaty ----------
 (function () {
   const range = document.getElementById('calc-range');
