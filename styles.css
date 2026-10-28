@@ -19,6 +19,7 @@
   --gutter: clamp(16px, 5vw, 72px);
   --section: clamp(72px, 10vw, 136px);
   --radius: 20px;
+  --radius-btn: 10px;
 }
 
 /* ---------- Base ---------- */
@@ -43,7 +44,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .section-lead { margin-top: 20px; font-size: clamp(1.1rem, 1.4vw, 1.25rem); color: var(--muted); max-width: 46ch; }
 
 /* ---------- Buttons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 26px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--ink); color: #fff; font: 700 1rem/1.2 var(--font-body); text-decoration: none; cursor: pointer; transition: background-color .15s ease, transform .1s ease; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 26px; border: 1.5px solid var(--ink); border-radius: var(--radius-btn); background: var(--ink); color: #fff; font: 700 1rem/1.2 var(--font-body); text-decoration: none; cursor: pointer; transition: background-color .15s ease, transform .1s ease; }
 .btn:hover { background: var(--ink-hover); border-color: var(--ink-hover); }
 .btn:active { transform: translateY(1px); }
 .btn--green { background: var(--green); border-color: var(--green); color: var(--ink); }
@@ -59,7 +60,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .nav-links { display: flex; align-items: center; gap: 28px; font-weight: 500; }
 .nav-links a { text-decoration: none; }
 .nav-links a:not(.nav-cta):hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1.5px; }
-.nav-cta { white-space: nowrap; padding: 10px 18px; border: 1.5px solid var(--ink); border-radius: 999px; transition: background-color .15s ease, color .15s ease; }
+.nav-cta { white-space: nowrap; padding: 10px 18px; border: 1.5px solid var(--ink); border-radius: var(--radius-btn); transition: background-color .15s ease, color .15s ease; }
 .nav-cta:hover { background: var(--ink); color: #fff; }
 
 /* ---------- Avatar ---------- */
@@ -80,6 +81,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .marker-line { animation: marker-in var(--dur, .55s) linear var(--delay, .25s) both; }
 .marker.is-drawn .marker-line { animation: none; }
 @keyframes marker-in { from { background-size: 0% 78%; } to { background-size: 100% 78%; } }
+.lead--short { display: none; }
 .lead { margin-top: 28px; font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--muted); max-width: 46ch; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
 
@@ -231,7 +233,9 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
   .hero h1 { order: 1; }
   .hero-photo { order: 2; margin-top: 20px; }
   .hero-photo img { max-height: min(40svh, 340px); }
-    .lead { order: 3; margin-top: 24px; }
+  .lead { order: 3; margin-top: 24px; }
+  .lead--long { display: none; }
+  .lead--short { display: block; }
   .actions { order: 4; margin-top: 24px; }
   .calc { position: static; }
   .place { height: 300px; }
@@ -241,6 +245,8 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
   .team-photo { max-width: 460px; }
 }
 @media (max-width: 600px) {
+  .actions { flex-wrap: nowrap; gap: 8px; }
+  .actions .btn { flex: 1 1 auto; padding: 15px 10px; font-size: .95rem; white-space: nowrap; }
   .station-grid { gap: 0; }
   .station-copy { display: contents; }
   .station-copy h2 { order: 1; }
