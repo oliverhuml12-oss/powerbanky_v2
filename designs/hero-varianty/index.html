@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>powerbanky.eu – nabíjecí stanice pro podniky zdarma</title>
+  <meta name="description" content="Nabíjecí stanici s powerbankami vám dáme zdarma. Z každé výpůjčky dostanete polovinu tržby. Instalaci i servis řešíme my.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- Review switcher: remove once a variant is chosen -->
+  <nav class="picker" aria-label="Varianty úvodní sekce">
+    <span>Varianta</span>
+    <a href="#varianta-a">A</a>
+    <a href="#varianta-b">B</a>
+    <a href="#varianta-c">C</a>
+  </nav>
+
+  <!-- Reusable station illustration -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="station" viewBox="0 0 320 270">
+        <rect x="14" y="250" width="292" height="12" rx="6" class="st-shadow"/>
+        <rect x="20" y="30" width="280" height="226" rx="26" class="st-body"/>
+        <rect x="42" y="50" width="236" height="78" rx="12" class="st-screen"/>
+        <g class="st-qr">
+          <rect x="56" y="62" width="54" height="54" rx="4" class="st-qr-bg"/>
+          <rect x="61" y="67" width="14" height="14" rx="2"/><rect x="91" y="67" width="14" height="14" rx="2"/>
+          <rect x="61" y="97" width="14" height="14" rx="2"/><rect x="80" y="72" width="6" height="6"/>
+          <rect x="80" y="86" width="6" height="6"/><rect x="88" y="86" width="6" height="6"/>
+          <rect x="96" y="96" width="6" height="6"/><rect x="82" y="102" width="6" height="6"/>
+          <rect x="96" y="106" width="6" height="6"/><rect x="66" y="88" width="6" height="6"/>
+        </g>
+        <rect x="124" y="70" width="120" height="10" rx="5" class="st-line"/>
+        <rect x="124" y="88" width="84" height="8" rx="4" class="st-line st-line--dim"/>
+        <rect x="124" y="104" width="100" height="8" rx="4" class="st-line st-line--dim"/>
+        <g class="st-slots">
+          <g class="st-slot"><rect x="40" y="146" width="34" height="88" rx="9" class="st-hole"/><g class="st-bank"><rect x="44" y="150" width="26" height="80" rx="7"/><circle cx="57" cy="166" r="2.6" class="st-led"/><circle cx="57" cy="175" r="2.6" class="st-led"/><circle cx="57" cy="184" r="2.6" class="st-led"/></g></g>
+          <g class="st-slot"><rect x="81" y="146" width="34" height="88" rx="9" class="st-hole"/><g class="st-bank"><rect x="85" y="150" width="26" height="80" rx="7"/><circle cx="98" cy="166" r="2.6" class="st-led"/><circle cx="98" cy="175" r="2.6" class="st-led"/><circle cx="98" cy="184" r="2.6" class="st-led"/></g></g>
+          <g class="st-slot"><rect x="122" y="146" width="34" height="88" rx="9" class="st-hole"/><g class="st-bank"><rect x="126" y="150" width="26" height="80" rx="7"/><circle cx="139" cy="166" r="2.6" class="st-led"/><circle cx="139" cy="175" r="2.6" class="st-led"/><circle cx="139" cy="184" r="2.6" class="st-led"/></g></g>
+          <g class="st-slot st-slot--out"><rect x="163" y="146" width="34" height="88" rx="9" class="st-hole"/><g class="st-bank"><rect x="167" y="150" width="26" height="80" rx="7"/><circle cx="180" cy="166" r="2.6" class="st-led"/><circle cx="180" cy="175" r="2.6" class="st-led"/><circle cx="180" cy="184" r="2.6" class="st-led"/></g></g>
+          <g class="st-slot"><rect x="204" y="146" width="34" height="88" rx="9" class="st-hole"/><g class="st-bank"><rect x="208" y="150" width="26" height="80" rx="7"/><circle cx="221" cy="166" r="2.6" class="st-led"/><circle cx="221" cy="175" r="2.6" class="st-led"/><circle cx="221" cy="184" r="2.6" class="st-led"/></g></g>
+          <g class="st-slot"><rect x="245" y="146" width="34" height="88" rx="9" class="st-hole"/><g class="st-bank"><rect x="249" y="150" width="26" height="80" rx="7"/><circle cx="262" cy="166" r="2.6" class="st-led"/><circle cx="262" cy="175" r="2.6" class="st-led"/><circle cx="262" cy="184" r="2.6" class="st-led"/></g></g>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main>
+
+    <!-- ============ VARIANTA A: Výplatní páska ============ -->
+    <section class="hero hero-a" id="varianta-a" aria-label="Varianta A">
+      <header class="a-nav">
+        <a class="logo" href="#varianta-a" aria-label="powerbanky.eu">
+          <svg viewBox="0 0 28 16" aria-hidden="true"><rect x="1" y="1" width="22" height="14" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="24" y="5" width="3" height="6" rx="1.2" fill="currentColor"/><rect x="4" y="4" width="10" height="8" rx="1.5" fill="#1BB473"/></svg>
+          powerbanky.eu
+        </a>
+        <nav class="a-links" aria-label="Hlavní navigace">
+          <a href="#">Jak to funguje</a>
+          <a href="#">Stanice</a>
+          <a href="#">Časté dotazy</a>
+          <a class="a-nav-cta" href="#kontakt">Chci stanici</a>
+        </nav>
+      </header>
+
+      <div class="a-grid">
+        <div class="a-copy">
+          <h1>Stanici vám dáme zdarma. Tržby dělíme napůl.</h1>
+          <p class="a-lead">Hosté si u vás půjčí nabitou powerbanku a vy dostanete polovinu z&nbsp;každé výpůjčky. Instalaci, servis i&nbsp;zákaznickou podporu řešíme my.</p>
+          <div class="a-actions">
+            <a class="btn-a" href="#kontakt">Chci stanici zdarma</a>
+            <a class="btn-a btn-a--ghost" href="#">Jak to funguje</a>
+          </div>
+          <div class="a-founder">
+            <span class="a-avatar" aria-hidden="true">OH<img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-4Xg0pUi9qd7wp7uARVjGd4rtKWQcFy.png" alt="" width="44" height="44" onerror="this.remove()"></span>
+            <p><strong>Oliver Huml</strong>, zakladatel<br>Ozvu se vám osobně do 24 hodin.</p>
+          </div>
+        </div>
+
+        <aside class="a-statement" aria-labelledby="a-calc-title">
+          <div class="a-statement-head">
+            <h2 id="a-calc-title">Odhad vaší měsíční výplaty</h2>
+          </div>
+          <label class="a-slider">
+            <span>Výpůjček denně <output id="a-n">3</output></span>
+            <input type="range" id="a-range" min="1" max="12" step="1" value="3" aria-describedby="a-note">
+          </label>
+          <dl class="a-rows">
+            <div><dt>Výpůjčky za měsíc</dt><dd id="a-rent">90</dd></div>
+            <div><dt>Tržba z výpůjček</dt><dd id="a-rev">9 000 Kč</dd></div>
+            <div><dt>Náklady na stanici a servis</dt><dd>0 Kč</dd></div>
+            <div class="a-total"><dt>Vaše polovina</dt><dd id="a-share">4 500 Kč</dd></div>
+          </dl>
+          <div class="a-meter" aria-hidden="true"><span id="a-meter"></span></div>
+          <p class="a-note" id="a-note">Počítáme s průměrnou tržbou 100 Kč za výpůjčku a 30 dny v měsíci.</p>
+        </aside>
+      </div>
+
+      <ul class="a-facts" data-impeccable-ignore="cramped-padding">
+        <li><b>0 Kč</b><span>za stanici, instalaci a servis</span></li>
+        <li><b>50 %</b><span>z každé výpůjčky je vašich</span></li>
+        <li><b>0 minut</b><span>práce pro váš personál</span></li>
+      </ul>
+    </section>
+
+    <!-- ============ VARIANTA B: Stanice v barvě ============ -->
+    <section class="hero hero-b" id="varianta-b" aria-label="Varianta B" data-impeccable-ignore="cramped-padding">
+      <div class="b-left">
+        <header class="b-nav">
+          <a class="logo" href="#varianta-b">powerbanky<span>.eu</span></a>
+          <a class="b-nav-link" href="#kontakt">Pro podniky</a>
+        </header>
+        <div class="b-copy">
+          <h1>Vybitý telefon pošle hosta domů. Nabitý ho udrží u&nbsp;stolu.</h1>
+          <p class="b-lead">Postavíme vám nabíjecí stanici s&nbsp;powerbankami. Nic za ni neplatíte a&nbsp;z&nbsp;každé výpůjčky vám připíšeme polovinu, v&nbsp;průměru 50&nbsp;Kč.</p>
+          <a class="btn-b" href="#kontakt">Chci stanici zdarma</a>
+          <ul class="b-points">
+            <li>Stanice, instalace a servis zdarma</li>
+            <li>Hosté si půjčují sami přes aplikaci nebo kartou</li>
+            <li>Výplata každý měsíc na účet</li>
+          </ul>
+        </div>
+      </div>
+      <div class="b-right" aria-hidden="true">
+        <div class="b-stage">
+          <svg class="station station--b" viewBox="0 0 320 270"><use href="#station"/></svg>
+          <div class="b-chip">+50&nbsp;Kč pro podnik</div>
+        </div>
+        <p class="b-caption">Stolní stanice na 6 powerbank. Zabere méně místa než stojan na ubrousky.</p>
+      </div>
+    </section>
+
+    <!-- ============ VARIANTA C: Nová položka na menu ============ -->
+    <section class="hero hero-c" id="varianta-c" aria-label="Varianta C">
+      <header class="c-nav">
+        <a class="logo" href="#varianta-c">powerbanky.eu</a>
+        <a class="c-nav-link" href="#kontakt">Domluvit schůzku</a>
+      </header>
+      <div class="c-grid">
+        <div class="c-copy">
+          <h1>Nová položka na vašem menu. Prodává se sama a&nbsp;nestojí vás nic.</h1>
+          <p class="c-lead">Nabíjecí stanici dostanete zdarma. Hosté si z&nbsp;ní půjčují powerbanky a&nbsp;polovina každé tržby patří vám. O&nbsp;stanici se staráme my, váš personál nemusí nic řešit.</p>
+          <div class="c-actions">
+            <a class="btn-c" href="#kontakt">Chci stanici zdarma</a>
+            <a class="c-link" href="#">Kolik vydělají podniky jako ten váš</a>
+          </div>
+        </div>
+        <figure class="c-menu" aria-label="Ukázka menu">
+          <div class="c-menu-card">
+            <p class="c-menu-title">Menu</p>
+            <dl>
+              <div><dt>Espresso</dt><dd>59</dd></div>
+              <div><dt>Flat white</dt><dd>85</dd></div>
+              <div><dt>Domácí limonáda</dt><dd>79</dd></div>
+              <div class="c-menu-new">
+                <dt>Nabitá powerbanka<small>na kávu, na oběd, na celý den</small></dt>
+                <dd>+50<small>pro vás</small></dd>
+              </div>
+            </dl>
+            <p class="c-menu-foot">Stanici, instalaci i servis hradí powerbanky.eu</p>
+          </div>
+          <svg class="station station--c" viewBox="0 0 320 270" aria-hidden="true"><use href="#station"/></svg>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
