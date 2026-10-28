@@ -16,8 +16,22 @@
     $('a-rent').textContent = fmt.format(rents);
     $('a-rev').textContent = fmt.format(revenue) + ' Kč';
     $('a-share').textContent = fmt.format(revenue * SHARE) + ' Kč';
-    $('a-meter').style.width = ((n - range.min) / (range.max - range.min)) * 92 + 8 + '%';
+    const pct = ((n - range.min) / (range.max - range.min)) * 100;
+    $('a-meter').style.width = pct * 0.92 + 8 + '%';
+    range.style.setProperty('--fill', pct + '%');
+    range.setAttribute('aria-valuetext', n + ' výpůjček denně, váš podíl ' + fmt.format(revenue * SHARE) + ' Kč měsíčně');
   }
   range.addEventListener('input', update);
   update();
+})();
+
+// Varianta B: animaci spustit, až když je sekce vidět
+(function () {
+  const hero = document.querySelector('.hero-b');
+  if (!hero) return;
+  if (!('IntersectionObserver' in window)) { hero.classList.add('is-live'); return; }
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { hero.classList.add('is-live'); io.disconnect(); }
+  }, { threshold: 0.45 });
+  io.observe(hero);
 })();
