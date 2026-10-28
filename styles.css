@@ -2,9 +2,9 @@
    powerbanky.eu – hlavní stránka (směr A)
    ========================================================= */
 :root {
-  --green: #1BB473;        /* brand fill; text on it is always --ink */
+  --green: #1FC47C;        /* brand fill; text on it is always --ink */
   --green-deep: #0A6B43;   /* green used as text/lines on white */
-  --green-hover: #17A066;
+  --green-hover: #1BB473;
   --ink: #161616;      /* near-black, neutral (no brown) */
   --ink-hover: #2E2E2E;
   --grey: #D9D9D9;
@@ -77,7 +77,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 
 .hero-photo { position: relative; margin: 0; display: flex; justify-content: center; }
 .hero-photo img { width: auto; max-width: 100%; max-height: min(72vh, 640px); }
-.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(27,180,115,.22); }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(31,196,124,.22); }
 
 .facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
 .facts li { display: flex; align-items: baseline; gap: 12px; padding-block: 22px; }
@@ -144,7 +144,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .rows dd { font-weight: 600; font-variant-numeric: tabular-nums; }
 .calc-result { margin-top: 20px; padding: 22px 24px 24px; border-radius: 18px; background: var(--green); display: flex; flex-direction: column; gap: 10px; }
 .calc-result span { font-weight: 700; line-height: 1.2; }
-.calc-result strong { font: 800 clamp(2.2rem, 4vw, 3rem)/1 var(--font-head); letter-spacing: -0.045em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.calc-result strong { color: #fff; font: 800 clamp(2.2rem, 4vw, 3rem)/1 var(--font-head); letter-spacing: -0.045em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .note { margin-top: 14px; font-size: .85rem; color: var(--muted); }
 
 /* ---------- Proč ---------- */
@@ -197,7 +197,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .field textarea { resize: vertical; min-height: 96px; }
 .field input::placeholder, .field textarea::placeholder { color: #707070; }
 .field input:hover, .field textarea:hover { border-color: #BDBDBD; }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(27,180,115,.35); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(31,196,124,.35); }
 .field input[aria-invalid="true"] { border-color: #B42318; }
 .error { color: #B42318; font-size: .9rem; }
 .form .btn { justify-self: start; margin-top: 4px; }
