@@ -10,7 +10,6 @@ The earlier three hero variants are archived in `designs/hero-varianty/` (open i
 
 ### Open TODOs
 - Location photos: 4 of ~10 are in `assets/img/mista/`. Add the rest as `<li class="place">` in the first list of `#mista` and in the two `aria-hidden` copies (empty alt there). With 8+ photos one copy can go: delete the third list and set the keyframe back to `-50%`.
-- Second founder: name and photo (`index.html`, section `#kdo-jsme`).
 - Contact form: set `FORM_ENDPOINT` in `script.js` (e.g. Formspree) and confirm `CONTACT_EMAIL`. Until then the form opens a pre-filled e-mail.
 - Real logo as SVG (header and footer currently use a placeholder wordmark).
 
