@@ -202,6 +202,7 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .field input[aria-invalid="true"] { border-color: #B42318; }
 .error { color: #B42318; font-size: .9rem; }
 .form .btn { justify-self: start; margin-top: 4px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-status { font-weight: 600; min-height: 1.5em; }
 .form-status.is-ok { color: var(--green-deep); }
 .form-status.is-err { color: #B42318; }

@@ -68,11 +68,12 @@
   update();
 })();
 
-// ---------- Kontaktní formulář ----------
-// FORM_ENDPOINT: adresa služby, která formulář přijme (např. Formspree).
-// Dokud je prázdná, formulář otevře e-mail na CONTACT_EMAIL s vyplněnými údaji.
-const FORM_ENDPOINT = '';
-const CONTACT_EMAIL = 'info@powerbanky.eu'; // TODO: potvrdit adresu
+// ---------- Kontaktní formulář → Supabase ----------
+// Poptávky se ukládají do tabulky public.poptavky v projektu Supabase "powerbanky.eu".
+// Publishable klíč je veřejný; tabulka (RLS) dovoluje webu jen vkládat, nic číst ani měnit.
+const SUPABASE_URL = 'https://rtrwsimsuangnatzubpx.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ozjrENV0PqBznFIcsNC0CQ_AEFo9AIn';
+const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslání selže
 
 (function () {
   const form = document.getElementById('contact-form');
@@ -103,30 +104,46 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // TODO: potvrdit adresu
     return !firstBad;
   }
 
+  function done(msg, ok) {
+    status.textContent = msg;
+    status.classList.add(ok ? 'is-ok' : 'is-err');
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     status.textContent = ''; status.className = 'form-status field--full';
     if (!validate()) return;
-    const data = Object.fromEntries(new FormData(form));
+    const d = Object.fromEntries(new FormData(form));
 
-    if (!FORM_ENDPOINT) {
-      const body = Object.entries(data).filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join('\n');
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Poptávka stanice: ' + data.podnik)}&body=${encodeURIComponent(body)}`;
-      status.textContent = 'Otevřeli jsme vám e-mail s vyplněnými údaji. Stačí ho odeslat.';
-      status.classList.add('is-ok');
-      return;
-    }
+    // Past na roboty: skryté pole vyplní jen bot. Tváříme se, že se odeslalo.
+    if (d.web) { form.reset(); done('Poptávka odeslána. Ozveme se vám do 24 hodin.', true); return; }
+
+    const clean = (v) => (v || '').trim() || null;
+    const row = {
+      jmeno: clean(d.jmeno),
+      podnik: clean(d.podnik),
+      telefon: clean(d.telefon),
+      email: clean(d.email),
+      zprava: clean(d.zprava),
+      zdroj: location.hostname + location.pathname,
+    };
 
     btn.disabled = true; btn.textContent = 'Odesílám…';
     try {
-      const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      const res = await fetch(SUPABASE_URL + '/rest/v1/poptavky', {
+        method: 'POST',
+        headers: {
+          apikey: SUPABASE_KEY,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify(row),
+      });
       if (!res.ok) throw new Error(res.status);
       form.reset();
-      status.textContent = 'Poptávka odeslána. Ozveme se vám do 24 hodin.';
-      status.classList.add('is-ok');
+      done('Poptávka odeslána. Ozveme se vám do 24 hodin.', true);
     } catch {
-      status.textContent = `Poptávku se nepodařilo odeslat. Zkuste to znovu, nebo napište na ${CONTACT_EMAIL}.`;
-      status.classList.add('is-err');
+      done(`Poptávku se nepodařilo odeslat. Zkuste to znovu, nebo napište na ${CONTACT_EMAIL}.`, false);
     } finally {
       btn.disabled = false; btn.textContent = 'Odeslat poptávku';
     }

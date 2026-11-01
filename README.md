@@ -10,8 +10,15 @@ The earlier three hero variants are archived in `designs/hero-varianty/` (open i
 
 ### Open TODOs
 - Location photos: 4 of ~10 are in `assets/img/mista/`. Add the rest as `<li class="place">` in the first list of `#mista` and in the two `aria-hidden` copies (empty alt there). With 8+ photos one copy can go: delete the third list and set the keyframe back to `-50%`.
-- Contact form: set `FORM_ENDPOINT` in `script.js` (e.g. Formspree) and confirm `CONTACT_EMAIL`. Until then the form opens a pre-filled e-mail.
 - Real logo as SVG (header and footer currently use a placeholder wordmark).
+
+## Contact form → Supabase
+Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubpx`, eu-central-1), table `public.poptavky`
+(jmeno, podnik, telefon, email, zprava, zdroj, vyrizeno, created_at). View them in the Supabase dashboard → Table Editor.
+
+- The site posts directly to the REST API with the publishable key (`script.js`). That key is public by design.
+- Row Level Security: the website (anon) can only INSERT; it cannot read, update or delete. Read via dashboard/service role only.
+- The database rejects rows without a phone or e-mail, invalid e-mails and oversized fields. A hidden honeypot field drops bot submissions.
 
 ## Deploy
 Plain static site (no build step). On Vercel, import the repo with the framework preset "Other" and no build command; the output directory is the root.
