@@ -114,6 +114,8 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslá
   // Úspěch: formulář zmizí, místo něj poděkování s animovanou fajfkou
   const success = document.getElementById('form-success');
   function showSuccess() {
+    // GA4: count a sent enquiry as a lead (mark 'generate_lead' as a key event in GA4)
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'kontakt' });
     form.reset();
     form.hidden = true;
     success.hidden = false;
