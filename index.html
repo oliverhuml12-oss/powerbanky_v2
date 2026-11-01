@@ -6,6 +6,12 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    // Consent Mode v2: nothing is stored until the visitor agrees (cookie lišta in script.js)
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+    try {
+      var c = JSON.parse(localStorage.getItem('pb-consent') || 'null');
+      if (c && c.analytics === true && Date.now() - c.t < 182 * 864e5) gtag('consent', 'update', { analytics_storage: 'granted' });
+    } catch (e) {}
     gtag('js', new Date());
 
     gtag('config', 'G-C74QYE07C7');
@@ -466,10 +472,19 @@
         <a href="#kdo-jsme">Kdo jsme</a>
         <a href="#otazky">Otázky</a>
         <a href="#kontakt">Kontakt</a>
+        <button class="footer-consent" type="button" id="consent-open">Nastavení cookies</button>
       </nav>
       <p class="footer-note">Sdílené powerbanky a&nbsp;nabíjecí stanice pro podniky po celé České republice. © 2026 powerbanky.eu</p>
     </div>
   </footer>
+
+  <section class="consent" id="consent" aria-label="Souhlas s cookies" hidden>
+    <p>Používáme cookies Google Analytics, abychom věděli, jak web používáte, a mohli ho zlepšovat. Bez vašeho souhlasu je neukládáme.</p>
+    <div class="consent-actions">
+      <button class="btn btn--ghost" type="button" data-consent="deny">Odmítnout</button>
+      <button class="btn btn--green" type="button" data-consent="allow">Přijmout</button>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>

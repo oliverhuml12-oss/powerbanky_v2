@@ -26,5 +26,10 @@ Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubp
 - `robots.txt` (blocks `/designs/`), `sitemap.xml` (update `lastmod` when content changes). `/designs/` also sends `noindex` (meta + `vercel.json` header).
 - To do outside the repo: domain is live: `powerbanky.eu` and `*.vercel.app` redirect to `www.powerbanky.eu` (primary), verify in Google Search Console and Seznam Webmaster, submit the sitemap.
 
+## Analytics & cookies
+- GA4 `G-C74QYE07C7` in `<head>` with Google Consent Mode v2: all storage `denied` by default, so no GA cookies until consent.
+- Cookie bar (`#consent`, logic in `script.js`): "Odmítnout" / "Přijmout" with equal weight. Choice stored in `localStorage` key `pb-consent` for 6 months; footer button "Nastavení cookies" reopens it.
+- Successful enquiry sends GA4 event `generate_lead` (mark it as a key event in GA4).
+
 ## Deploy
 Plain static site (no build step). On Vercel, import the repo with the framework preset "Other" and no build command; the output directory is the root.

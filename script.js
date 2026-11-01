@@ -177,3 +177,32 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslá
   // the CSS fade ends 1 s after navigation start; remove the node then (or now, if already past)
   setTimeout(() => pre.remove(), Math.max(0, 1050 - performance.now()));
 })();
+
+// ---------- Cookie lišta (Google Consent Mode v2) ----------
+// Volba se ukládá do localStorage 'pb-consent' na 6 měsíců; pak se zeptáme znovu.
+(function () {
+  const box = document.getElementById('consent');
+  if (!box) return;
+  const KEY = 'pb-consent';
+  const MAX_AGE = 182 * 864e5;
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  const valid = saved && typeof saved.analytics === 'boolean' && Date.now() - saved.t < MAX_AGE;
+
+  function show() { box.hidden = false; }
+  function choose(allow) {
+    try { localStorage.setItem(KEY, JSON.stringify({ analytics: allow, t: Date.now() })); } catch (e) {}
+    if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: allow ? 'granted' : 'denied' });
+    box.hidden = true;
+  }
+
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-consent]');
+    if (b) choose(b.dataset.consent === 'allow');
+  });
+  const open = document.getElementById('consent-open');
+  if (open) open.addEventListener('click', () => { show(); box.querySelector('[data-consent="allow"]').focus(); });
+
+  // first visit: show after the preloader has gone
+  if (!valid) setTimeout(show, Math.max(0, 1100 - performance.now()));
+})();
