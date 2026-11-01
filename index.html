@@ -244,6 +244,7 @@
           <h2>Chcete stanici k&nbsp;sobě do podniku?</h2>
           <p class="section-lead">Nechte nám kontakt a&nbsp;do 24 hodin se ozveme. Domluvíme se, jestli se stanice k&nbsp;vám hodí, a&nbsp;když ano, přivezeme ji.</p>
         </div>
+        <div class="contact-box">
         <form class="form" id="contact-form" novalidate>
           <div class="field">
             <label for="f-name">Vaše jméno</label>
@@ -275,6 +276,21 @@
           <button class="btn field--full" type="submit">Odeslat poptávku</button>
           <p class="form-status field--full" id="form-status" role="status" aria-live="polite"></p>
         </form>
+        <div class="form-success" id="form-success" tabindex="-1" hidden>
+          <svg class="check" viewBox="0 0 80 80" aria-hidden="true">
+            <circle class="check-ring" cx="40" cy="40" r="36"/>
+            <path class="check-tick" d="M25 41.5 L35.5 52 L56 30"/>
+          </svg>
+          <h3>Děkujeme, poptávka je u&nbsp;nás.</h3>
+          <p class="form-success-lead">Ozveme se vám do 24 hodin a&nbsp;domluvíme se, jestli se stanice k&nbsp;vám hodí.</p>
+          <ul class="form-success-usp">
+            <li><b>0 Kč</b> za stanici, instalaci i&nbsp;servis</li>
+            <li><b>50 %</b> z&nbsp;každé výpůjčky je vašich</li>
+            <li><b>0 minut</b> práce pro váš personál</li>
+          </ul>
+          <button class="form-again" type="button" id="form-again">Odeslat další poptávku</button>
+        </div>
+        </div>
       </div>
     </section>
 

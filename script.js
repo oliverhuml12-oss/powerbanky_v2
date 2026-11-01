@@ -109,6 +109,23 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslá
     status.classList.add(ok ? 'is-ok' : 'is-err');
   }
 
+  // Úspěch: formulář zmizí, místo něj poděkování s animovanou fajfkou
+  const success = document.getElementById('form-success');
+  function showSuccess() {
+    form.reset();
+    form.hidden = true;
+    success.hidden = false;
+    success.classList.remove('is-shown'); void success.offsetWidth; success.classList.add('is-shown');
+    success.focus({ preventScroll: true });
+    const top = success.getBoundingClientRect().top;
+    if (top < 0 || top > innerHeight * 0.6) success.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+  }
+  document.getElementById('form-again').addEventListener('click', () => {
+    success.hidden = true; success.classList.remove('is-shown');
+    status.textContent = ''; status.className = 'form-status field--full';
+    form.hidden = false; f('f-name').focus();
+  });
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     status.textContent = ''; status.className = 'form-status field--full';
@@ -116,7 +133,7 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslá
     const d = Object.fromEntries(new FormData(form));
 
     // Past na roboty: skryté pole vyplní jen bot. Tváříme se, že se odeslalo.
-    if (d.web) { form.reset(); done('Poptávka odeslána. Ozveme se vám do 24 hodin.', true); return; }
+    if (d.web) { showSuccess(); return; }
 
     const clean = (v) => (v || '').trim() || null;
     const row = {
@@ -140,8 +157,7 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslá
         body: JSON.stringify(row),
       });
       if (!res.ok) throw new Error(res.status);
-      form.reset();
-      done('Poptávka odeslána. Ozveme se vám do 24 hodin.', true);
+      showSuccess();
     } catch {
       done(`Poptávku se nepodařilo odeslat. Zkuste to znovu, nebo napište na ${CONTACT_EMAIL}.`, false);
     } finally {
