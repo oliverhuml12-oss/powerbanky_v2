@@ -185,6 +185,8 @@ h3 { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.03em; }
 .faq details[open] summary::after { transform: rotate(45deg); }
 .faq summary:hover { color: var(--green-deep); }
 .faq details p { padding: 0 0 24px; color: var(--muted); max-width: 58ch; }
+.faq details p a { color: var(--ink); font-weight: 600; text-decoration-color: var(--green); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.faq details p a:hover { color: var(--green-deep); }
 
 /* ---------- Kontakt ---------- */
 .contact { padding-block: var(--section); background: var(--grey-soft); }
