@@ -14,9 +14,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js')</script>
+  <style>
+    /* Preloader: inline so it paints before styles.css loads. Pure CSS, gone after 1 s at most. */
+    .preloader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #fff; animation: preloader-out .25s ease-in .75s forwards; }
+    .preloader svg { width: 96px; height: 55px; color: #161616; }
+    .preloader-fill { fill: #1FC47C; transform-box: fill-box; transform-origin: left center; transform: scaleX(0); animation: battery-fill .65s cubic-bezier(.45,0,.2,1) .05s forwards; }
+    @keyframes battery-fill { to { transform: scaleX(1); } }
+    @keyframes preloader-out { to { opacity: 0; visibility: hidden; } }
+    @media (prefers-reduced-motion: reduce) { .preloader { display: none; } }
+  </style>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
+  <div class="preloader" aria-hidden="true">
+    <svg viewBox="0 0 28 16"><rect x="1" y="1" width="22" height="14" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="24" y="5" width="3" height="6" rx="1.2" fill="currentColor"/><rect class="preloader-fill" x="4" y="4" width="16" height="8" rx="1.5"/></svg>
+  </div>
   <a class="skip" href="#obsah">Přeskočit na obsah</a>
 
   <header class="site-header">

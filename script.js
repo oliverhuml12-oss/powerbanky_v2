@@ -22,7 +22,9 @@
     el.classList.add('is-split');
     // constant pen speed: each line's duration follows its width, next line starts when the previous ends
     const SPEED = 14 * parseFloat(getComputedStyle(el).fontSize); // 14 em/s: same feel on every screen
-    let delay = 0.25;
+    // start after the preloader (≤1 s) has faded, unless it is skipped for reduced motion
+    const pre = document.querySelector('.preloader');
+    let delay = pre && getComputedStyle(pre).display !== 'none' ? 1.0 : 0.25;
     el.querySelectorAll('.marker-line').forEach((ln) => {
       const dur = Math.max(0.18, ln.getBoundingClientRect().width / SPEED);
       ln.style.setProperty('--dur', dur.toFixed(3) + 's');
@@ -164,4 +166,12 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslá
       btn.disabled = false; btn.textContent = 'Odeslat poptávku';
     }
   });
+})();
+
+// ---------- Preloader: remove from the DOM once it has faded ----------
+(function () {
+  const pre = document.querySelector('.preloader');
+  if (!pre) return;
+  // the CSS fade ends 1 s after navigation start; remove the node then (or now, if already past)
+  setTimeout(() => pre.remove(), Math.max(0, 1050 - performance.now()));
 })();
