@@ -17,7 +17,7 @@
   <style>
     /* Preloader: inline so it paints before styles.css loads. Pure CSS: battery fills (≈0.6 s), then the screen fades out; gone by 1 s. */
     .preloader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #fff; animation: preloader-out .32s ease-out .66s forwards; }
-    .preloader svg { width: 72px; height: 126px; color: #161616; animation: battery-out .32s ease-out .66s forwards; }
+    .preloader svg { width: 96px; height: 168px; color: #161616; animation: battery-out .32s ease-out .66s forwards; }
     .preloader-fill { fill: #1FC47C; transform-box: fill-box; transform-origin: center bottom; transform: scaleY(0); animation: battery-fill .58s cubic-bezier(.45,0,.2,1) .04s forwards; }
     @keyframes battery-fill { to { transform: scaleY(1); } }
     @keyframes battery-out { to { transform: scale(.94); } }
@@ -28,7 +28,7 @@
 </head>
 <body>
   <div class="preloader" aria-hidden="true">
-    <svg viewBox="0 0 16 28"><rect x="5.5" y=".6" width="5" height="2.4" rx=".8" fill="currentColor"/><rect x="1.35" y="3.35" width="13.3" height="23.8" rx="3" fill="none" stroke="currentColor" stroke-width=".7"/><rect class="preloader-fill" x="3.1" y="5.1" width="9.8" height="20.3" rx="1.6"/></svg>
+    <svg viewBox="0 0 16 28"><rect x="5.5" y=".6" width="5" height="2.4" rx=".8" fill="currentColor"/><rect x="1.35" y="3.35" width="13.3" height="23.8" rx="3" fill="none" stroke="currentColor" stroke-width=".85"/><rect class="preloader-fill" x="3.1" y="5.1" width="9.8" height="20.3" rx="1.6"/></svg>
   </div>
   <a class="skip" href="#obsah">Přeskočit na obsah</a>
 
