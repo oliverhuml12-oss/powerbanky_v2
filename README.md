@@ -20,5 +20,11 @@ Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubp
 - Row Level Security: the website (anon) can only INSERT; it cannot read, update or delete. Read via dashboard/service role only.
 - The database rejects rows without a phone or e-mail, invalid e-mails and oversized fields. A hidden honeypot field drops bot submissions.
 
+## SEO
+- Canonical, Open Graph and Twitter tags point to `https://powerbanky.eu/`. Share image: `assets/img/og-image.jpg` (1200×630).
+- JSON-LD in `index.html`: Organization (founders, logo), WebSite, Service, FAQPage. FAQ schema mirrors the FAQ section; update both together.
+- `robots.txt` (blocks `/designs/`), `sitemap.xml` (update `lastmod` when content changes). `/designs/` also sends `noindex` (meta + `vercel.json` header).
+- To do outside the repo: connect the `powerbanky.eu` domain in Vercel (set it as primary so `*.vercel.app` redirects), verify in Google Search Console and Seznam Webmaster, submit the sitemap.
+
 ## Deploy
 Plain static site (no build step). On Vercel, import the repo with the framework preset "Other" and no build command; the output directory is the root.

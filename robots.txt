@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /designs/
+
+Sitemap: https://powerbanky.eu/sitemap.xml
