@@ -28,7 +28,7 @@ Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubp
 
 ## Analytics & cookies
 - GA4 `G-C74QYE07C7` in `<head>` with Google Consent Mode v2: all storage `denied` by default, so no GA cookies until consent.
-- Cookie bar (`#consent`, logic in `script.js`): "Odmítnout" / "Přijmout" with equal weight. Choice stored in `localStorage` key `pb-consent` for 6 months; footer button "Nastavení cookies" reopens it.
+- Cookie dialog (`<dialog id="consent">`, logic in `script.js`): centered modal, first layer "Přijmout vše" + "Spravovat nastavení"; settings layer with per-category toggles (analytics pre-checked, per owner's choice) + "Uložit nastavení". Esc does not dismiss. Choice stored in `localStorage` key `pb-consent` for 6 months; footer "Nastavení cookies" opens the settings layer.
 - Successful enquiry sends GA4 event `generate_lead` (mark it as a key event in GA4).
 
 ## Deploy

@@ -179,30 +179,48 @@ const CONTACT_EMAIL = 'info@powerbanky.eu'; // záloha pro případ, že odeslá
 })();
 
 // ---------- Cookie lišta (Google Consent Mode v2) ----------
+// Okno uprostřed: "Přijmout vše" je vždy vidět, ostatní volby jsou v "Spravovat nastavení".
 // Volba se ukládá do localStorage 'pb-consent' na 6 měsíců; pak se zeptáme znovu.
 (function () {
-  const box = document.getElementById('consent');
-  if (!box) return;
+  const dlg = document.getElementById('consent');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
   const KEY = 'pb-consent';
   const MAX_AGE = 182 * 864e5;
+  const main = dlg.querySelector('.consent-main');
+  const settings = dlg.querySelector('.consent-settings');
+  const analytics = document.getElementById('consent-analytics');
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
   const valid = saved && typeof saved.analytics === 'boolean' && Date.now() - saved.t < MAX_AGE;
 
-  function show() { box.hidden = false; }
+  function open(showSettings) {
+    main.hidden = !!showSettings;
+    settings.hidden = !showSettings;
+    if (valid || saved) analytics.checked = !!(saved && saved.analytics);
+    if (!dlg.open) dlg.showModal();
+    dlg.querySelector(showSettings ? '#consent-analytics' : '[data-consent="allow"]').focus();
+  }
   function choose(allow) {
-    try { localStorage.setItem(KEY, JSON.stringify({ analytics: allow, t: Date.now() })); } catch (e) {}
+    saved = { analytics: allow, t: Date.now() };
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
     if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: allow ? 'granted' : 'denied' });
-    box.hidden = true;
+    dlg.close();
   }
 
-  box.addEventListener('click', (e) => {
+  dlg.addEventListener('click', (e) => {
     const b = e.target.closest('[data-consent]');
-    if (b) choose(b.dataset.consent === 'allow');
+    if (!b) return;
+    const a = b.dataset.consent;
+    if (a === 'allow') choose(true);
+    else if (a === 'save') choose(analytics.checked);
+    else if (a === 'manage') open(true);
   });
-  const open = document.getElementById('consent-open');
-  if (open) open.addEventListener('click', () => { show(); box.querySelector('[data-consent="allow"]').focus(); });
+  // a choice is required: Esc does not dismiss the dialog
+  dlg.addEventListener('cancel', (e) => e.preventDefault());
+
+  const footerBtn = document.getElementById('consent-open');
+  if (footerBtn) footerBtn.addEventListener('click', () => open(true));
 
   // first visit: show after the preloader has gone
-  if (!valid) setTimeout(show, Math.max(0, 1100 - performance.now()));
+  if (!valid) setTimeout(() => open(false), Math.max(0, 1100 - performance.now()));
 })();
