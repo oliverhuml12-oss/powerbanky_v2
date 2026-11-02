@@ -36,5 +36,8 @@ Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubp
 - Cookie dialog (`<dialog id="consent">`, logic in `script.js`): centered modal, first layer "Přijmout vše" + "Spravovat nastavení"; settings layer with per-category toggles (analytics pre-checked, per owner's choice) + "Uložit nastavení". Esc does not dismiss. Choice stored in `localStorage` key `pb-consent` for 6 months; footer "Nastavení cookies" opens the settings layer.
 - Successful enquiry sends GA4 event `generate_lead` (mark it as a key event in GA4).
 
+## Smluvní podmínky
+`/smluvni-podminky` (`smluvni-podminky/index.html`): terms for partner venues. Intentionally not linked from the site and not in the sitemap; `noindex` via meta and `vercel.json` header. Prints cleanly to A4 PDF. TODO: fill in the registered address (highlighted placeholder).
+
 ## Deploy
 Plain static site (no build step). On Vercel, import the repo with the framework preset "Other" and no build command; the output directory is the root.
