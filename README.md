@@ -19,6 +19,11 @@ Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubp
 - The site posts directly to the REST API with the publishable key (`script.js`). That key is public by design.
 - Row Level Security: the website (anon) can only INSERT; it cannot read, update or delete. Read via dashboard/service role only.
 - The database rejects rows without a phone or e-mail, invalid e-mails and oversized fields. A hidden honeypot field drops bot submissions.
+- **E-mail notification:** trigger `poptavky_notify` (function `private.notify_new_poptavka`, pg_net, async) POSTs each new row to the
+  `lead-notify` edge function in the **email-sender** Supabase project (`nhnryvxhirqrqgciolxn`). It sends from the Gmail mailbox
+  connected there (`info@powerbanky.eu`) to `info@powerbanky.eu`, with Reply-To set to the customer. Shared secret: Vault secret
+  `lead_notify_secret` here = `public.lead_notify_secret.secret` there (also holds `notify_to` / `from_mailbox`).
+  Delivery log: `select * from net._http_response order by created desc`.
 
 ## SEO
 - Canonical, Open Graph and Twitter tags point to `https://www.powerbanky.eu/`. Share image: `assets/img/og-image.jpg` (1200×630).
