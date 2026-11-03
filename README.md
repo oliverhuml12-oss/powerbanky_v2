@@ -37,7 +37,7 @@ Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubp
 - Successful enquiry sends GA4 event `generate_lead` (mark it as a key event in GA4).
 
 ## Smluvní podmínky
-`/smluvni-podminky` (`smluvni-podminky/index.html`): terms for partner venues. Intentionally not linked from the site and not in the sitemap; `noindex` via meta and `vercel.json` header. Prints cleanly to A4 PDF. TODO: fill in the registered address (highlighted placeholder).
+`/smluvni-podminky` (`smluvni-podminky/index.html`): terms for partner venues. Intentionally not linked from the site and not in the sitemap; `noindex` via meta and `vercel.json` header. Prints cleanly to A4 PDF.
 
 ## Deploy
 Plain static site (no build step). On Vercel, import the repo with the framework preset "Other" and no build command; the output directory is the root.
