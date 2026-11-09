@@ -1,5 +1,2 @@
 User-agent: *
 Allow: /
-Disallow: /designs/
-
-Sitemap: https://www.powerbanky.eu/sitemap.xml

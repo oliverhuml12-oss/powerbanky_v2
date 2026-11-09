@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/designs/(.*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -17,15 +17,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=2592000"
-        }
-      ]
-    },
-    {
-      "source": "/smluvni-podminky(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow"
         }
       ]
     }

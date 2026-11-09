@@ -25,11 +25,11 @@ Enquiries are stored in Supabase project **powerbanky.eu** (`rtrwsimsuangnatzubp
   `lead_notify_secret` here = `public.lead_notify_secret.secret` there (also holds `notify_to` / `from_mailbox`).
   Delivery log: `select * from net._http_response order by created desc`.
 
-## SEO
-- Canonical, Open Graph and Twitter tags point to `https://www.powerbanky.eu/`. Share image: `assets/img/og-image.jpg` (1200×630).
-- JSON-LD in `index.html`: Organization (founders, logo), WebSite, Service, FAQPage. FAQ schema mirrors the FAQ section; update both together.
-- `robots.txt` (blocks `/designs/`), `sitemap.xml` (update `lastmod` when content changes). `/designs/` also sends `noindex` (meta + `vercel.json` header).
-- To do outside the repo: domain is live: `powerbanky.eu` and `*.vercel.app` redirect to `www.powerbanky.eu` (primary), verify in Google Search Console and Seznam Webmaster, submit the sitemap.
+## SEO / indexing
+- **Indexing is OFF** (owner's decision, 2026-11-09): `<meta name="robots" content="noindex, nofollow">` on every page and a site-wide `X-Robots-Tag: noindex, nofollow` header in `vercel.json`.
+- `robots.txt` deliberately still allows crawling, so search engines can read the noindex and drop pages already indexed. Do not add `Disallow: /`, or Google cannot see the noindex. `sitemap.xml` removed.
+- To turn indexing back on: set the meta to `index, follow, max-image-preview:large`, remove the `/(.*)` header from `vercel.json` (keep `noindex` for `/designs/` and `/smluvni-podminky`), restore `sitemap.xml` and the `Sitemap:` line in `robots.txt`.
+- Canonical, Open Graph/Twitter tags (`https://www.powerbanky.eu/`, share image `assets/img/og-image.jpg`) and JSON-LD stay in place; they don't affect indexing and keep link previews working.
 
 ## Analytics & cookies
 - GA4 `G-C74QYE07C7` in `<head>` with Google Consent Mode v2: all storage `denied` by default, so no GA cookies until consent.
